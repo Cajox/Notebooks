@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Notebook extends Model
 {
@@ -18,4 +19,14 @@ class Notebook extends Model
         'search_data',
         'price'
     ];
+
+    /**
+     * Notebook specifications
+     *
+     * @return HasMany
+     */
+    public function specifications()
+    {
+        return $this->hasMany(Specification::class);
+    }
 }
