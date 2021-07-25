@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Repository\NotebookRepository;
 use App\Repository\SpecificationRepository;
 use App\Services\Interfaces\NotebookServiceInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class NotebookService implements NotebookServiceInterface
 {
@@ -29,6 +30,16 @@ class NotebookService implements NotebookServiceInterface
     {
         $this->notebookRepository = $notebookRepository;
         $this->specificationRepository = $specificationRepository;
+    }
+
+    /**
+     * Get all notebooks - pagination 20 per page
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getAllNotebooks()
+    {
+        return $this->notebookRepository->getAll();
     }
 
     /**
