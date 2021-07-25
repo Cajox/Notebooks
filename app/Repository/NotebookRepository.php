@@ -6,6 +6,7 @@ namespace App\Repository;
 use App\Models\Notebook;
 use App\Repository\Interfaces\NotebookRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class NotebookRepository implements NotebookRepositoryInterface
@@ -22,6 +23,18 @@ class NotebookRepository implements NotebookRepositoryInterface
     public function __construct(Notebook $notebookModel)
     {
         $this->notebookModel = $notebookModel;
+    }
+
+    /**
+     * Get all notebooks - pagination 20 per page
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getAll()
+    {
+        return $this->notebookModel
+            ->with('specifications')
+            ->paginate(20);
     }
 
     /**
